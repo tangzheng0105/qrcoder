@@ -12,5 +12,56 @@
         <input name="url2" type="text">
         <button type="submit">提交</button>
     </form>
+
+    <button onclick="getUrl()">获取二维码</button>
 </body>
+<script src="/pay/assets/js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="http://res.wx.qq.com/open/js/jweixin-1.2.0.js" type="text/javascript"></script>
+<script type="text/javascript">
+	/**
+	var host = "http://localhost/pay"
+	$.ajax({
+		url:host+"/welcome/getSignPackage",
+		type:"POST",
+		data: {
+			url: location.href
+		},
+		success: function (res) {
+			// body...
+			var data= JSON.parse(res)
+			console.log(data)
+			wx.config({
+				debug: true,
+				appId: '<?php echo $signPackage["appId"];?>',
+				timestamp: '<?php echo $signPackage["timestamp"];?>',
+				nonceStr: '<?php echo $signPackage["nonceStr"];?>',
+				signature: '<?php echo $signPackage["signature"];?>',
+				jsApiList: ["scanQRCode"]
+			})
+		}
+	})
+	**/
+	wx.config({
+		debug: true,
+		appId: '<?php echo $signPackage["appId"];?>',
+		timestamp: '<?php echo $signPackage["timestamp"];?>',
+		nonceStr: '<?php echo $signPackage["nonceStr"];?>',
+		signature: '<?php echo $signPackage["signature"];?>',
+		jsApiList: ["scanQRCode"]
+	})
+	wx.ready(function (){
+
+	})
+
+	function getUrl() {
+		wx.scanQRCode({
+			needResult: 1, // 默认为0，扫描结果由微信处理，1则直接返回扫描结果，
+			scanType: ["qrCode","barCode"], // 可以指定扫二维码还是一维码，默认二者都有
+			success: function (res) {
+				var result = res.resultStr; // 当needResult 为 1 时，扫码返回的结果
+				console.log(result)
+			}
+		});
+	}
+</script>
 </html>
