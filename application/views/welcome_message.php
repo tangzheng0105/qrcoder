@@ -126,7 +126,7 @@
             $('#timer').text(i);
             if (i == 0) {
                 clearInterval(timer);
-                // window.location.href = "<?php echo $redbag_url;?>";
+                window.location.href = "<?php echo $redbag_url;?>";
             }
         }, 1000);
 

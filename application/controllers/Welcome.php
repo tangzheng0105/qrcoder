@@ -40,8 +40,10 @@ class Welcome extends CI_Controller {
 		$data['url1'] = $_POST['url1'];
 		$data['url2'] = $_POST['url2'];
 		$this->load->model('Url_model');
-		$this->Url_model->insertInfo();
-		$this->load->view('success.html', $data);
+		$res = $this->Url_model->insertInfo();
+		// var_dump($res);
+		echo json_encode($res);
+		// $this->load->view('success.html', $data);
 	}
 
 	//获取accesstoken

@@ -29,5 +29,6 @@ class Url_model extends CI_Model
         //   INSERT INTO mytable (title, name, date) VALUES ('{$title}', '{$name}', '{$date}')
         //
         $this->db->insert('url_info', $this);
+        return $this->db->insert_id();
     }
 }
